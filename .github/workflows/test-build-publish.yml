@@ -11,7 +11,7 @@ jobs:
     uses: ./.github/workflows/test.yml
 
   build-publish:
-    needs: build-test
+    needs: test
     runs-on: ubuntu-latest
 
     permissions:
