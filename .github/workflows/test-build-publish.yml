@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    uses: pickle-time/pickletime-frontend/.github/workflows/test.yml@main
+    uses: PickLe-Time/pickletime-frontend/.github/workflows/test.yml@main
 
   build-publish:
     needs: test
