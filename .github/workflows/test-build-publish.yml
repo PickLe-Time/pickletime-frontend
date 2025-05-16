@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Test, Build, and Publish Image
 
 on:
   push:
@@ -7,7 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_and_push:
+  test:
+    uses: ./.github/workflows/test.yml
+
+  build-publish:
+    needs: build-test
     runs-on: ubuntu-latest
 
     permissions:
@@ -35,3 +39,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ghcr.io/pickle-time/pickletime-frontend:latest
+          
