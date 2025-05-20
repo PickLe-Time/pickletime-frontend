@@ -1,56 +1,70 @@
-# Pickleball Scheduler
-Welcome to PickLeTime! This web application is designed to help users to organize and schedule their games. It is built using Javascript and uses React, Fastify for back end routing, Prisma for database management, and SQLite as the database.
+# 🥒🕒 PickLeTime Frontend
 
-## Features
+This is the **frontend** for **PickLeTime**, a web application built with **React** and **Vite**. It serves as the user interface, connecting to the Pickletime backend via REST APIs and is designed to be containerized and deployed via Docker.
 
-- **User Authentication:** Securely manage user accounts and ensure data privacy.
-- **Event Scheduling:** Easily schedule pickleball events and view upcoming games.
-- **Participant Management:** Keep track of participants and their availability.
-- **Responsive Design:** The app is designed to work seamlessly across various devices.
+## 🚀 Tech Stack
+* [React](https://reactjs.org/)
+* [Vite](https://vitejs.dev/)
+* [JavaScript (JSX)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+* [MUI (Material UI)](https://mui.com/)
+* [Docker](https://www.docker.com/)
+* [NGINX](https://www.nginx.com/) (in production via reverse proxy)
 
-## Technologies Used
 
-- **React:** A JavaScript library for building user interfaces.
-- **Prisma:** A modern database toolkit for TypeScript and Node.js.
-- **Fastify:** A fast and low overhead web framework for Node.js.
-- **SQLite:** A lightweight and serverless relational database.
+## 🛠️ Development
 
-## Getting Started
-Make sure you have [Node.js](http://nodejs.org/).
-Follow these steps to get the Pickleball Scheduler Web App up and running on your local machine:
+### Prerequisites
 
-1. Clone the repository:
-```
-git clone <repo-name>
-```
-2. Navigate to the project directory:
-```
-cd <repo-name>
-```
-3. Install dependencies
-```
-cd <repo-name>
+- [Node.js](https://nodejs.org/en/download) (>= 18)
+- [Docker Engine](https://docs.docker.com/engine/) / [Docker Desktop](https://docs.docker.com/desktop/)
+
+### Setup
+
+```bash
+# Clone the repo
+git clone https://github.com/PickLe-Time/pickletime-frontend.git
+cd pickletime-frontend
+
+# Install dependencies
 npm install
+````
+### Environment Variables
+
+Configure `.env.example` and rename to `.env`:
+
+```env
+# Backend API host
+VITE_API_HOST_URL = "http://localhost:5000"
+# Vite origin URL
+VITE_ORIGIN_URL = "http://localhost:5173"
 ```
-4. Configure .env.example and rename to .env
-5. Generate Prisma Instance
-```
-cd packages/server
-npx prisma generate
-npx prisma migrate dev --name init
-```
-6. Start the app
-```
-cd ../..
+
+Adjust `VITE_API_HOST_URL` to point to your backend.
+Adjust `VITE_ORIGIN_URL` to point to your frontend.
+
+### Run Locally
+
+```bash
 npm run start
 ```
 
-After executing these commands, your React frontend should now be running on [localhost:5173](http://localhost:5173/). You can visit this page in your web browser to view your front-end user interface.
+App will be available at: [http://localhost:5173](http://localhost:5173)
 
-## Deployment
 
-To deploy this with your current local version, run
+## 🐳 Docker
 
-```sh
-npm run deploy
-```
+This project is Docker-ready. A production build is expected to be served via NGINX. Published containers can be found at the [PickLe-Time packages page](https://github.com/PickLe-Time/pickletime-frontend/pkgs/container/pickletime-frontend).
+
+
+
+## 🔗 Related Repositories
+
+* [pickletime-backend](https://github.com/pickle-time/pickletime-backend)
+* [pickletime-infra](https://github.com/pickle-time/pickletime-infra)
+
+## 📦 Deployment
+
+This frontend is expected to be deployed as part of a Docker Compose stack, reverse proxied through NGINX with HTTPS termination.
+
+For more, see the [`pickletime-infra`](https://github.com/pickletime/pickletime-infra) repo.
+
