@@ -61,7 +61,7 @@ export default function EventCalendar() {
     SessionsAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'GET',
-      url: 'api/sessions',
+      url: '/api/sessions',
     });
   };
 
@@ -128,7 +128,7 @@ export default function EventCalendar() {
     SessionCreateAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'POST',
-      url: `api/users/${user.username}/sessions`,
+      url: `/api/users/${user.username}/sessions`,
       requestConfig: data,
     });
   };
@@ -147,7 +147,7 @@ export default function EventCalendar() {
     SessionUpdateAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'PUT',
-      url: `api/sessions/${currentEvent?.id}`,
+      url: `/api/sessions/${currentEvent?.id}`,
       requestConfig: data,
     });
     const newEvents = events.map((event) => (event.id === data.id ? data : event));
@@ -158,7 +158,7 @@ export default function EventCalendar() {
     SessionDeleteAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'DELETE',
-      url: `api/sessions/${currentEvent.id}`,
+      url: `/api/sessions/${currentEvent.id}`,
     });
     setEvents(() => [...events].filter((e) => e.id !== currentEvent.id));
     setEventInfoModal(false);

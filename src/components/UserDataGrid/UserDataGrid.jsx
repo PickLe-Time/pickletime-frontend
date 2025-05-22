@@ -80,7 +80,7 @@ export default function UsersDataGrid() {
     UsersAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'GET',
-      url: 'api/users',
+      url: '/api/users',
     });
   };
 
@@ -124,7 +124,7 @@ export default function UsersDataGrid() {
     UserDelAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'DELETE',
-      url: `api/users/${row.username}`,
+      url: `/api/users/${row.username}`,
     });
   };
 
@@ -146,14 +146,14 @@ export default function UsersDataGrid() {
       UserUpdateAxiosFetch({
         axiosInstance: axiosPrivate,
         method: 'PUT',
-        url: `api/users/${updatedRow.id}`,
+        url: `/api/users/${updatedRow.id}`,
         requestConfig: updatedRow,
       });
     } else {
       UserCreateAxiosFetch({
         axiosInstance: axiosPrivate,
         method: 'POST',
-        url: 'api/users/register',
+        url: '/api/users/register',
         requestConfig: updatedRow,
       });
     }

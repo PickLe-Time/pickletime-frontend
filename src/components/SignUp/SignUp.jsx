@@ -54,7 +54,7 @@ export default function SignUp() {
     axiosFetch({
       axiosInstance: axios,
       method: 'POST',
-      url: 'api/users/register',
+      url: '/api/users/register',
       requestConfig: {
         username: data.get('username'),
         password: data.get('password'),

@@ -88,7 +88,7 @@ export default function Account() {
     UserUpdateAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'PATCH',
-      url: `api/users/${user.username}`,
+      url: `/api/users/${user.username}`,
       requestConfig,
     });
 
@@ -123,7 +123,7 @@ export default function Account() {
     UserDeleteAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'DELETE',
-      url: `api/users/${user.username}`,
+      url: `/api/users/${user.username}`,
     });
   }
 

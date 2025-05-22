@@ -98,7 +98,7 @@ export default function BasicSessionsDataGrid() {
     SessionsAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'GET',
-      url: `api/users/${user.username}/sessions`,
+      url: `/api/users/${user.username}/sessions`,
     });
   };
 
@@ -142,7 +142,7 @@ export default function BasicSessionsDataGrid() {
     SessionDelAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'DELETE',
-      url: `api/sessions/${row.id}`,
+      url: `/api/sessions/${row.id}`,
     });
   };
 
@@ -164,14 +164,14 @@ export default function BasicSessionsDataGrid() {
       SessionUpdateAxiosFetch({
         axiosInstance: axiosPrivate,
         method: 'PUT',
-        url: `api/sessions/${updatedRow.id}`,
+        url: `/api/sessions/${updatedRow.id}`,
         requestConfig: updatedRow,
       });
     } else {
       SessionCreateAxiosFetch({
         axiosInstance: axiosPrivate,
         method: 'POST',
-        url: `api/users/${updatedRow.username}/sessions`,
+        url: `/api/users/${updatedRow.username}/sessions`,
         requestConfig: updatedRow,
       });
     }
