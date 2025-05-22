@@ -3,8 +3,8 @@ name: Test, Build, and Publish Image
 on:
   push:
     branches:
-      - main
-      - 11-add-ssh-pull-container-step-to-github-actions-workflow
+      # - main
+      - '**'
   workflow_dispatch:
 
 jobs:
