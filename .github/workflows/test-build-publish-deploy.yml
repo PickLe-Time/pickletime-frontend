@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - 11-add-ssh-pull-container-step-to-github-actions-workflow
   workflow_dispatch:
 
 jobs:
