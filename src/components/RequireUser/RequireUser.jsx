@@ -3,7 +3,6 @@ import {
 } from 'react-router-dom';
 import useUser from '../../hooks/useUser';
 import PropTypes from 'prop-types';
-import { access } from 'fs';
 
 
 // Require username of logged in user to match the username of requested route.
