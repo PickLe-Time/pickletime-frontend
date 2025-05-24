@@ -11,3 +11,13 @@ services:
     env_file:
      - .env
     command: ["npm", "run", "preview"]
+
+  frontend-nginx:
+    container_name: frontend-nginx
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "80:80"
+    env_file:
+    - .env
