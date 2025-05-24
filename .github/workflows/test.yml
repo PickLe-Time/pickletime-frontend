@@ -13,16 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: node:20
+      image: node:20-slim
 
     steps:
 
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Ensure npm cache directory exists
-        run: mkdir -p /root/.npm
-    
+      - name: Cache npm dependencies
+        run: mkdir -p ~/.npm
       - uses: actions/cache@v3
         with:
           path: /root/.npm
