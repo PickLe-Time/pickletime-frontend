@@ -9,7 +9,7 @@ const useLogout = () => {
   const logout = async () => {
     setUser({});
     try {
-      const response = await axiosPrivate.delete('api/auth/logout');
+      const response = await axiosPrivate.delete('/api/auth/logout');
       console.log(response);
     } catch (error) {
       console.error(error);
