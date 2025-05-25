@@ -34,7 +34,7 @@ export default function NextSession() {
     SessionsAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'GET',
-      url: 'api/sessions',
+      url: '/api/sessions',
     });
   };
 
