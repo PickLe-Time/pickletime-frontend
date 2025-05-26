@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import AppBar from './AppBar.jsx';
 
 // Mock react-router-dom Link to render children as simple anchor tags
