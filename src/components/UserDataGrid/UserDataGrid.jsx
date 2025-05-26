@@ -153,7 +153,7 @@ export default function UsersDataGrid() {
       UserCreateAxiosFetch({
         axiosInstance: axiosPrivate,
         method: 'POST',
-        url: '/api/users/register',
+        url: '/api/users',
         requestConfig: updatedRow,
       });
     }
