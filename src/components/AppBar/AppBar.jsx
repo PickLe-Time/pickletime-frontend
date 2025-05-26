@@ -71,6 +71,7 @@ function ResponsiveAppBar() {
             color="inherit"
             component={Link}
             to="/"
+            aria-label="home"
           >
             <LogoIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           </IconButton>
@@ -178,7 +179,7 @@ function ResponsiveAppBar() {
             && (
             <>
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <IconButton aria-label="open settings" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar sx={{ color: 'inherit', bgcolor: `${user.color}` }}>
                     {user.username && user.username[0].toUpperCase()}
                   </Avatar>
@@ -257,6 +258,7 @@ function ResponsiveAppBar() {
             && (
             <Tooltip title="Sign In">
               <IconButton
+                aria-label="sign in"
                 component={Link}
                 to="/login"
                 sx={{ p: 0 }}
