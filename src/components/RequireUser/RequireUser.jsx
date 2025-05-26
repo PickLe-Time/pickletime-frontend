@@ -13,9 +13,6 @@ export default function RequireUser({ allowedRole }) {
   const location = useLocation();
 
   return (
-    console.log('RequireUser'),
-    console.log(user?.role, user?.allowedRole, user?.accessToken),
-    console.log((user?.role?.includes(allowedRole))),
     // If user is an admin or user is the user of the requested page
     ((user?.role?.includes(allowedRole) || user?.username === username)
       && <Outlet />
