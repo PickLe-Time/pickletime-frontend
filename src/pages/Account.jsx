@@ -123,7 +123,7 @@ export default function Account() {
     UserDeleteAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'DELETE',
-      url: `/api/users/${user.username}`,
+      url: `/api/users/${user.id}`,
     });
   }
 

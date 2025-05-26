@@ -124,7 +124,7 @@ export default function UsersDataGrid() {
     UserDelAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'DELETE',
-      url: `/api/users/${row.username}`,
+      url: `/api/users/${row.id}`,
     });
   };
 
