@@ -98,7 +98,7 @@ export default function BasicSessionsDataGrid() {
     SessionsAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'GET',
-      url: `/api/users/${user.username}/sessions`,
+      url: `/api/users/${user.id}/sessions`,
     });
   };
 
