@@ -82,7 +82,7 @@ export default function NextSession() {
         startTime: parseISO(obj.startTime),
         endTime: parseISO(obj.endTime),
       }));
-      const UserSessionsDateObj = SessionsDateObj.filter((obj) => obj.username === user.username);
+      const UserSessionsDateObj = SessionsDateObj.filter((obj) => obj.user?.username === user.username);
       // Get closest date
       const closestNextSession = findClosestSession(UserSessionsDateObj);
       setNextSession(closestNextSession);

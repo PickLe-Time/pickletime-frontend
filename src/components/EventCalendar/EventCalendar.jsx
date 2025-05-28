@@ -137,7 +137,7 @@ export default function EventCalendar() {
     e.preventDefault();
     const data = {
       id: currentEvent.id,
-      username: currentEvent?.username,
+      username: currentEvent?.user?.username,
       startTime: currentEvent?.startTime,
       endTime: currentEvent?.endTime,
     };
@@ -211,7 +211,7 @@ export default function EventCalendar() {
               endAccessor="endTime"
               defaultView="week"
               eventPropGetter={(event) => {
-                const isUserEvent = user?.username === event.username;
+                const isUserEvent = user?.username === event.user?.username;
                 return {
                   style: {
                     backgroundColor: isUserEvent ? user?.color : '#4e4d59',

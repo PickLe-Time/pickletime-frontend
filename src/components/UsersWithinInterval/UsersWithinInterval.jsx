@@ -18,9 +18,9 @@ export default function EventsWithinInterval({ currentEvent, events }) {
       if (
         (isWithinInterval(eventStart, { start: currentEventStart, end: currentEventEnd })
         || isWithinInterval(eventEnd, { start: currentEventStart, end: currentEventEnd }))
-        && !uniqueUsernames.has(event.username)
+        && !uniqueUsernames.has(event.user?.username)
       ) {
-        uniqueUsernames.add(event.username);
+        uniqueUsernames.add(event.user?.username);
         uniqueEvents.push(event);
       }
     });
@@ -57,7 +57,7 @@ export default function EventsWithinInterval({ currentEvent, events }) {
               color="text.secondary"
               textAlign="left"
             >
-              {`@${event?.username}`}
+              {`@${event?.user?.username}`}
             </Typography>
 
           </Box>
