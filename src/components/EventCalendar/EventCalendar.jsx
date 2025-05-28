@@ -118,7 +118,6 @@ export default function EventCalendar() {
     e.preventDefault();
     const data = {
       id: crypto.randomUUID(),
-      username: user?.username,
       startTime: currentEvent?.start,
       endTime: currentEvent?.end,
     };
@@ -128,7 +127,7 @@ export default function EventCalendar() {
     SessionCreateAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'POST',
-      url: `/api/users/${user.username}/sessions`,
+      url: `/api/users/${user.id}/sessions`,
       requestConfig: data,
     });
   };
