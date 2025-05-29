@@ -120,7 +120,13 @@ export default function EventCalendar() {
       id: crypto.randomUUID(),
       startTime: currentEvent?.start,
       endTime: currentEvent?.end,
+      userId: user?.id,
+      user: {
+        username: user?.username,
+        displayName: user?.displayName,
+      },
     };
+    const { user: userData, ...requestConfig } = data;
     const newEvents = [...events, data];
     setEvents(newEvents);
     handleClose();
@@ -128,7 +134,7 @@ export default function EventCalendar() {
       axiosInstance: axiosPrivate,
       method: 'POST',
       url: `/api/users/${user.id}/sessions`,
-      requestConfig: data,
+      requestConfig: requestConfig,
     });
   };
 
@@ -137,17 +143,19 @@ export default function EventCalendar() {
     e.preventDefault();
     const data = {
       id: currentEvent.id,
-      username: currentEvent?.user?.username,
       startTime: currentEvent?.startTime,
       endTime: currentEvent?.endTime,
+      userId: currentEvent.userId,
+      user: currentEvent?.user,
     };
+    const {user: userData, ...requestConfig } = data;
     // Close info and open editor
     handleEditSlotClose();
     SessionUpdateAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'PUT',
       url: `/api/sessions/${currentEvent?.id}`,
-      requestConfig: data,
+      requestConfig: requestConfig,
     });
     const newEvents = events.map((event) => (event.id === data.id ? data : event));
     setEvents(newEvents);
