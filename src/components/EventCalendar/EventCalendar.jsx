@@ -126,7 +126,7 @@ export default function EventCalendar() {
         displayName: user?.displayName,
       },
     };
-    const { user: userData, ...requestConfig } = data;
+    const { user: _, ...requestConfig } = data;
     const newEvents = [...events, data];
     setEvents(newEvents);
     handleClose();
@@ -148,7 +148,7 @@ export default function EventCalendar() {
       userId: currentEvent.userId,
       user: currentEvent?.user,
     };
-    const {user: userData, ...requestConfig } = data;
+    const { user: _, ...requestConfig } = data;
     // Close info and open editor
     handleEditSlotClose();
     SessionUpdateAxiosFetch({

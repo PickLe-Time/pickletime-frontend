@@ -56,13 +56,16 @@ module.exports = defineConfig([{
             code: 120,
             ignoreComments: true,
         }],
-
         "no-console": "off",
         "no-restricted-exports": "off",
         "import/extensions": "off",
         "import/prefer-default-export": "off",
         "react/react-in-jsx-scope": "off",
         "react/prop-types": "off",
+        "no-unused-vars": ["error", {
+            argsIgnorePattern: "^_",
+            varsIgnorePattern: "^_"
+        }],
     },
 
     settings: {
