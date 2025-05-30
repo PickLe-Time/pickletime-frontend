@@ -41,11 +41,15 @@ function EditToolbar(props) {
     setRows((oldRows) => [...oldRows,
       {
         id,
-        username: '',
         startTime: new Date().toISOString(),
         endTime: currentDate.toISOString(),
         creationDate: new Date().toISOString(),
-        user: {},
+        userId: '',
+        username: '',
+        user: {
+          username: '',
+          displayName: '',
+        },
         isNew: true,
       },
     ]);
@@ -102,7 +106,11 @@ export default function SessionsDataGrid() {
   // Set sessions after mount
   useEffect(() => {
     if (SessionsResponse?.length !== 0) {
-      setRows(SessionsResponse);
+      // Flatten the response to include username
+      setRows(SessionsResponse.map(session => ({
+        ...session,
+        username: session.user?.username || '',
+      })));
     }
   }, [SessionsResponse]);
 
@@ -157,6 +165,7 @@ export default function SessionsDataGrid() {
 
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow };
+    console.log('processRowUpdate', updatedRow);
     if (updatedRow.isNew !== true) {
       SessionUpdateAxiosFetch({
         axiosInstance: axiosPrivate,

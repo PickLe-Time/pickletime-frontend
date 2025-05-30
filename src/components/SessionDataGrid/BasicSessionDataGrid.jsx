@@ -44,6 +44,7 @@ function EditToolbar(props) {
       {
         id,
         username: user.username,
+        userId: user.id,
         startTime: new Date().toISOString(),
         endTime: currentDate.toISOString(),
         creationDate: new Date().toISOString(),
@@ -171,7 +172,7 @@ export default function BasicSessionsDataGrid() {
       SessionCreateAxiosFetch({
         axiosInstance: axiosPrivate,
         method: 'POST',
-        url: `/api/users/${updatedRow.username}/sessions`,
+        url: `/api/users/${updatedRow.userId}/sessions`,
         requestConfig: updatedRow,
       });
     }
