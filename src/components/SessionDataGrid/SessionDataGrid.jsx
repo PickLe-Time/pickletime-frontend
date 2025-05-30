@@ -165,7 +165,6 @@ export default function SessionsDataGrid() {
 
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow };
-    console.log('processRowUpdate', updatedRow);
     if (updatedRow.isNew !== true) {
       SessionUpdateAxiosFetch({
         axiosInstance: axiosPrivate,
