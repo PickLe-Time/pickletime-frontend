@@ -61,7 +61,7 @@ export default function Footer() {
         >
           <IconButton
             color="inherit"
-            href="https://github.com/KrisVan/Pickleball-Scheduler"
+            href="https://github.com/PickLe-Time"
             target="_blank"
             aria-label="GitHub"
             sx={{ alignSelf: 'center' }}
