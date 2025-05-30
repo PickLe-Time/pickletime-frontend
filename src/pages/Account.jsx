@@ -83,12 +83,11 @@ export default function Account() {
         ...(data.get('theme') && { theme: data.get('theme') }),
       },
     };
-
     // Request to update user
     UserUpdateAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'PATCH',
-      url: `/api/users/${user.username}`,
+      url: `/api/users/${user.id}`,
       requestConfig,
     });
 
@@ -123,7 +122,7 @@ export default function Account() {
     UserDeleteAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'DELETE',
-      url: `/api/users/${user.username}`,
+      url: `/api/users/${user.id}`,
     });
   }
 

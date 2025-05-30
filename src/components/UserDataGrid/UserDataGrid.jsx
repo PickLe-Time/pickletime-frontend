@@ -124,7 +124,7 @@ export default function UsersDataGrid() {
     UserDelAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'DELETE',
-      url: `/api/users/${row.username}`,
+      url: `/api/users/${row.id}`,
     });
   };
 
@@ -153,7 +153,7 @@ export default function UsersDataGrid() {
       UserCreateAxiosFetch({
         axiosInstance: axiosPrivate,
         method: 'POST',
-        url: '/api/users/register',
+        url: '/api/users',
         requestConfig: updatedRow,
       });
     }

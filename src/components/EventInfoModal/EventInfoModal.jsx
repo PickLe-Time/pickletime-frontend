@@ -19,7 +19,7 @@ export default function EventInfoModal({
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogActions>
-        {currentEvent?.username === user?.username
+        {currentEvent?.user?.username === user?.username
           ? (
             <>
               <Grid

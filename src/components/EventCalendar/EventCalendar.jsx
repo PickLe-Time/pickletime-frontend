@@ -118,18 +118,23 @@ export default function EventCalendar() {
     e.preventDefault();
     const data = {
       id: crypto.randomUUID(),
-      username: user?.username,
       startTime: currentEvent?.start,
       endTime: currentEvent?.end,
+      userId: user?.id,
+      user: {
+        username: user?.username,
+        displayName: user?.displayName,
+      },
     };
+    const { user: _, ...requestConfig } = data;
     const newEvents = [...events, data];
     setEvents(newEvents);
     handleClose();
     SessionCreateAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'POST',
-      url: `/api/users/${user.username}/sessions`,
-      requestConfig: data,
+      url: `/api/users/${user.id}/sessions`,
+      requestConfig: requestConfig,
     });
   };
 
@@ -138,17 +143,19 @@ export default function EventCalendar() {
     e.preventDefault();
     const data = {
       id: currentEvent.id,
-      username: currentEvent?.username,
       startTime: currentEvent?.startTime,
       endTime: currentEvent?.endTime,
+      userId: currentEvent.userId,
+      user: currentEvent?.user,
     };
+    const { user: _, ...requestConfig } = data;
     // Close info and open editor
     handleEditSlotClose();
     SessionUpdateAxiosFetch({
       axiosInstance: axiosPrivate,
       method: 'PUT',
       url: `/api/sessions/${currentEvent?.id}`,
-      requestConfig: data,
+      requestConfig: requestConfig,
     });
     const newEvents = events.map((event) => (event.id === data.id ? data : event));
     setEvents(newEvents);
@@ -212,7 +219,7 @@ export default function EventCalendar() {
               endAccessor="endTime"
               defaultView="week"
               eventPropGetter={(event) => {
-                const isUserEvent = user?.username === event.username;
+                const isUserEvent = user?.username === event.user?.username;
                 return {
                   style: {
                     backgroundColor: isUserEvent ? user?.color : '#4e4d59',
