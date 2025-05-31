@@ -1,20 +1,11 @@
 # docker build -f DockerFile -t ghcr.io/pickle-time/pickletime-frontend:latest .
 # docker run -d --name frontend -p 5173:5173 ghcr.io/pickle-time/pickletime-frontend:latest
 
-# Stage 1: Build the app: 
+# Build the app 
   FROM node:20-alpine AS builder
   WORKDIR /app
   COPY package*.json ./
   RUN npm install
   COPY . .
   RUN npm run build
-  EXPOSE 5173
-  CMD [ "npm", "run", "preview" ]
 
-# Stage 2: Serve with NGINX
-  FROM nginx:alpine
-  COPY --from=builder /app/dist /usr/share/nginx/html
-  COPY nginx.conf /etc/nginx/conf.d/default.conf
-  EXPOSE 80
-  EXPOSE 443
-  CMD ["nginx", "-g", "daemon off;"]
