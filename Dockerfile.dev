@@ -1,17 +1,6 @@
 # docker build -f DockerFile -t ghcr.io/pickle-time/pickletime-frontend:latest .
 # docker run -d --name frontend -p 5173:5173 ghcr.io/pickle-time/pickletime-frontend:latest
 
-# FROM node:20-alpine AS builder
-# WORKDIR /app
-# COPY package*.json ./
-# RUN npm install
-# COPY . .
-# RUN npm run build
-# EXPOSE 5173
-# CMD [ "npm", "run", "preview" ]
-
-
-# Stage 1: Build the app: 
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
