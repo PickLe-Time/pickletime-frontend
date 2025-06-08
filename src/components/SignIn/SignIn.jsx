@@ -54,7 +54,6 @@ export default function SignIn() {
   const [rememberMe, setRememberMe] = useState(false);
   // API request
   const [response, error, loading, axiosFetch] = useAxiosFunction();
-  const [settingsResponse, settingsError, settingsLoading, settingsAxiosFetch] = useAxiosFunction();
 
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -65,12 +64,6 @@ export default function SignIn() {
           method: 'POST',
           url: '/api/auth/google',
           requestConfig: { token: tokenResponse.access_token },
-        });
-        // Get user settings
-        await settingsAxiosFetch({
-          axiosInstance: axios,
-          method: 'GET',
-          url: `/api/users/${response?.username}/settings`,
         });
       } catch (err) {
         console.error('Google login error:', err);
@@ -93,12 +86,6 @@ export default function SignIn() {
         password: data.get('password'),
       },
     });
-    // Get user settings
-    settingsAxiosFetch({
-      axiosInstance: axios,
-      method: 'GET',
-      url: `/api/users/${data.get('username')}/settings`,
-    });
   };
 
   // Handle remember me checkbox
@@ -109,14 +96,13 @@ export default function SignIn() {
   // Set user context with user data and user settings, and persist
   useEffect(() => {
     const isValidResponse = response && !Array.isArray(response) && Object.keys(response).length > 0;
-    const isValidSettings = settingsResponse && Object.keys(settingsResponse).length > 0;
-    if (isValidResponse && isValidSettings && hasSubmitted) {
-      setUser({ ...response, ...settingsResponse });
+    if (isValidResponse && hasSubmitted) {
+      setUser(response);
       localStorage.setItem('persist', rememberMe);
       setPersist(rememberMe);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [response, settingsResponse, hasSubmitted, rememberMe]);
+  }, [response, hasSubmitted, rememberMe]);
 
   // Render sign in component
   return (
@@ -207,14 +193,10 @@ export default function SignIn() {
           </Grid>
         </Box>
       </Box>
-      {hasSubmitted && loading && settingsLoading && <SimpleBackdrop />}
+      {hasSubmitted && loading && <SimpleBackdrop />}
       {hasSubmitted && !loading && !loading && error
         && <AlertDisplay severity="warning" message={error} />}
-      {hasSubmitted && !settingsLoading && settingsError
-        && <AlertDisplay severity="warning" message={settingsError} />}
-      {hasSubmitted && !loading && !error && response && !settingsLoading
-        && !settingsError && settingsResponse
-        && (
+      {hasSubmitted && !loading && !error && response && (
         <>
           <AlertDisplay
             severity="success"

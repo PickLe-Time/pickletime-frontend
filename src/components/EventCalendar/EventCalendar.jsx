@@ -222,7 +222,7 @@ export default function EventCalendar() {
                 const isUserEvent = user?.username === event.user?.username;
                 return {
                   style: {
-                    backgroundColor: isUserEvent ? user?.color : '#4e4d59',
+                    backgroundColor: isUserEvent ? user?.settings?.color : '#4e4d59',
                     borderColor: '#ffffff',
                   },
                 };

@@ -31,7 +31,7 @@ export default function Account() {
 
   const [isChange, setIsChange] = useState(false);
   const [isPasswordChange, setIsPasswordChange] = useState(false);
-  const [userColor, setUserColor] = useState(user.color);
+  const [userColor, setUserColor] = useState(user.settings.color);
   const [password, setPassword] = useState('');
   const [confirmationPassword, setConfirmationPassword] = useState('');
   const [displayNameError, setDisplayNameError] = useState('');
@@ -42,7 +42,7 @@ export default function Account() {
   const [openColorModal, setOpenColorModal] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbar, setSnackbar] = useState(null);
-  const [selectedTheme, setSelectedTheme] = useState(user.theme);
+  const [selectedTheme, setSelectedTheme] = useState(user.settings.theme);
 
   const [UserUpdateResponse, UserUpdateError, UserUpdateLoading, UserUpdateAxiosFetch] = useAxiosFunction();
   const [UserDeleteResponse, UserDeleteError, UserDeleteLoading, UserDeleteAxiosFetch] = useAxiosFunction();
@@ -61,8 +61,8 @@ export default function Account() {
     // Set fields to default values
     document.getElementById('settings').reset();
     // Set states to initial values
-    setUserColor(user.color);
-    setSelectedTheme(user.theme);
+    setUserColor(user.settings.color);
+    setSelectedTheme(user.settings.theme);
     setConfirmationPassword('');
     setDisplayNameError('');
     setPasswordError('');
@@ -329,7 +329,7 @@ export default function Account() {
                 id="theme"
                 label="Theme"
                 name="theme"
-                defaultValue={user.theme}
+                defaultValue={user.settings.theme}
                 value={selectedTheme}
                 onChange={(event) => handleThemeChange(event.target.value)}
               >
