@@ -45,7 +45,7 @@ function AlertDisplay(props) {
 }
 
 export default function SignIn() {
-  const { user, setUser, setPersist } = useUser();
+  const { setUser, setPersist } = useUser();
 
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
@@ -58,13 +58,19 @@ export default function SignIn() {
 
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
+      setHasSubmitted(true);
       try {
-        console.log('Google login successful:', tokenResponse);
         await axiosFetch({
           axiosInstance: axios,
           method: 'POST',
           url: '/api/auth/google',
           requestConfig: { token: tokenResponse.access_token },
+        });
+        // Get user settings
+        await settingsAxiosFetch({
+          axiosInstance: axios,
+          method: 'GET',
+          url: `/api/users/${response?.username}/settings`,
         });
       } catch (err) {
         console.error('Google login error:', err);
@@ -102,12 +108,15 @@ export default function SignIn() {
 
   // Set user context with user data and user settings, and persist
   useEffect(() => {
-    if (response.length !== 0 && settingsResponse.length !== 0 && hasSubmitted) {
+    const isValidResponse = response && !Array.isArray(response) && Object.keys(response).length > 0;
+    const isValidSettings = settingsResponse && Object.keys(settingsResponse).length > 0;
+    if (isValidResponse && isValidSettings && hasSubmitted) {
       setUser({ ...response, ...settingsResponse });
       localStorage.setItem('persist', rememberMe);
       setPersist(rememberMe);
     }
-  }, [response, settingsResponse, hasSubmitted, user, setUser, rememberMe, setPersist]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [response, settingsResponse, hasSubmitted, rememberMe]);
 
   // Render sign in component
   return (
