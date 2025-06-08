@@ -58,6 +58,7 @@ export default function SignIn() {
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       setHasSubmitted(true);
+      setRememberMe(true);
       try {
         await axiosFetch({
           axiosInstance: axios,
