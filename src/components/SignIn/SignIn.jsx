@@ -13,10 +13,13 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import GoogleIcon from '@mui/icons-material/Google';
 // Hooks/API/Providers
 import axios from '../../api/axios.jsx';
 import useAxiosFunction from '../../hooks/useAxiosFunction.jsx';
 import useUser from '../../hooks/useUser.jsx';
+import { useGoogleLogin } from '@react-oauth/google'
 // Local Components
 import SimpleBackdrop from '../SimpleBackDrop/SimpleBackdrop.jsx';
 import Copyright from '../Copyright/Copyright.jsx';
@@ -53,7 +56,23 @@ export default function SignIn() {
   const [response, error, loading, axiosFetch] = useAxiosFunction();
   const [settingsResponse, settingsError, settingsLoading, settingsAxiosFetch] = useAxiosFunction();
 
-  // Handle sumbit of data
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        console.log('Google login successful:', tokenResponse);
+        await axiosFetch({
+          axiosInstance: axios,
+          method: 'POST',
+          url: '/api/auth/google',
+          requestConfig: { token: tokenResponse.access_token },
+        });
+      } catch (err) {
+        console.error('Google login error:', err);
+      }
+    }
+  });
+
+  // Handle sumbit of data for user/password
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -76,7 +95,7 @@ export default function SignIn() {
     });
   };
 
-  // Handle remember me checkboc
+  // Handle remember me checkbox
   const handleTogglePersist = (event) => {
     setRememberMe(event.target.checked);
   };
@@ -137,18 +156,35 @@ export default function SignIn() {
                 checked={rememberMe}
                 onChange={handleTogglePersist}
               />
-)}
+            )}
             label="Remember me"
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3}}
           >
             Sign In
           </Button>
-          <Grid container>
+          <Divider textAlign="center" sx={{ my:1.5 , typography: 'body1', color: 'text.secondary' }}>
+            or
+          </Divider>
+          <Button
+            fullWidth
+            variant="outlined"
+            startIcon={<GoogleIcon/>}
+            onClick={handleGoogleLogin}
+            sx={{
+              textTransform: 'none',
+              borderColor: 'theme.palette.text.primary',
+              borderWidth: 2,
+              color: 'text.primary',
+            }}
+          >
+            Sign in with Google
+          </Button>
+          <Grid container sx={{ mt: 2 }}>
             <Grid item xs>
               <Link component={RouterLink} to="/about" variant="body2">
                 Forgot password?
