@@ -180,7 +180,7 @@ function ResponsiveAppBar() {
             <>
               <Tooltip title="Open settings">
                 <IconButton aria-label="open settings" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar sx={{ color: 'inherit', bgcolor: `${user.color}` }}>
+                  <Avatar sx={{ color: 'inherit', bgcolor: `${user?.settings?.color}` }}>
                     {user.username && user.username[0].toUpperCase()}
                   </Avatar>
                 </IconButton>
@@ -208,7 +208,7 @@ function ResponsiveAppBar() {
                   minHeight={50}
                   sx={{ px: 1, mb: 1 }}
                 >
-                  <Avatar sx={{ color: 'inherit', bgcolor: `${user.color}` }}>
+                  <Avatar sx={{ color: 'inherit', bgcolor: `${user?.settings?.color}` }}>
                     {user.username && user.username[0].toUpperCase()}
                   </Avatar>
                   <Box
